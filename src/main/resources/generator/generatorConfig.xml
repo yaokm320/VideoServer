@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--context是逆向工程的主要配置信息-->
+    <!--targetRuntime：设置生成的文件适应于哪个mybatis版本-->
+    <context id="MysqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <!--分隔符 -->
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!-- 通用mapper插件 -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <!-- 此处的 MyMapper注意一定不能被扫描到-->
+            <property name="mappers" value="com.example.utils.MyMapper"/>
+        </plugin>
+
+        <!--jdbc连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/awesome_video"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <!-- 生成的实体类所在目录 -->
+        <!-- targetPackage：实体类所在的包 -->
+        <!-- targetProject：实体类所在的硬盘的位置-->
+        <javaModelGenerator targetPackage="com.example.entity" targetProject="src/main/java"/>
+
+        <!-- 生成的mapper所在目录 -->
+        <!-- targetPackage：生成的mapper文件的包-->
+        <!-- targetProject：生成的mapper文件所在的硬盘的位置-->
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources"/>
+
+        <!-- 生成的dao所在目录 -->
+        <!-- targetPackage：生成的interface文件的包-->
+        <!-- targetProject：生成的interface文件所在硬盘上的位置-->
+        <javaClientGenerator targetPackage="com.example.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+
+        <!--表名和实体类名映射-->
+        <table tableName="bgm" domainObjectName="Bgm"/>
+        <table tableName="comments" domainObjectName="Comment"/>
+        <table tableName="search_records" domainObjectName="SearchRecords"/>
+        <table tableName="users" domainObjectName="User"/>
+        <table tableName="users_fans" domainObjectName="UserFans"/>
+        <table tableName="users_like_videos" domainObjectName="UserLikeVideos"/>
+        <table tableName="users_report" domainObjectName="UserReport"/>
+        <table tableName="videos" domainObjectName="Video"/>
+
+        <!--自动生成所有表的实体类-->
+        <!--<table tableName="%" >-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+
+    </context>
+</generatorConfiguration>
